@@ -1,0 +1,43 @@
+    <v-row class="section">
+      <v-col cols="12">
+        <h2 class="section-heading">{{ title }}</h2>
+        <v-divider class="section-divider" />
+      </v-col>
+
+      <v-col cols="12" v-for="item in items" :key="item.title">
+        <article class="pub-card">
+          <a
+            v-if="item.venue"
+            class="pub-badge"
+            :href="item.venueHref || '#'"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ item.venue }}
+          </a>
+
+          <h3 class="entry-title">{{ item.title }}</h3>
+
+          <div class="entry-meta">
+            <!-- render authors HTML directly; keep this safe since authors are hardcoded -->
+            <span class="entry-authors" v-html="item.authors"></span>
+          </div>
+
+          <div class="entry-summary" v-html="$renderMd(item.summary)"></div>
+
+          <div v-if="item.links?.length" class="entry-links">
+            <a
+              v-for="link in item.links"
+              :key="link.href"
+              :href="link.href"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ link.label }}
+            </a>
+          </div>
+        </article>
+
+        <v-divider class="entry-divider" />
+      </v-col>
+    </v-row>

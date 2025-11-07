@@ -1,101 +1,74 @@
 <script setup>
-import MarkdownIt from 'markdown-it'
-import 'katex/dist/katex.min.css'
-import katex from 'katex'
-import { onMounted, nextTick } from 'vue'
-
-const md = new MarkdownIt({ html: true, linkify: true, typographer: false })
-
-/**
- * Replace LaTeX math in a markdown string with KaTeX-rendered HTML.
- * We render display math first ($$...$$), then inline math ($...$).
- * This ensures the generated KaTeX HTML (including inline style attributes)
- * is present before markdown-it converts the rest of the text to HTML.
- */
-function renderMathToHtml(src) {
-  if (!src) return ''
-
-  // Render display math $$...$$
-  const withDisplay = src.replace(/\$\$([\s\S]+?)\$\$/g, (_m, tex) => {
-    try {
-      return katex.renderToString(tex, { displayMode: true, throwOnError: false })
-    } catch (e) {
-      return _m
-    }
-  })
-
-  // Render inline math $...$ (avoid matching $$)
-  const withInline = withDisplay.replace(/(^|[^$])\$(?!\$)([^$\n]+?)\$(?!\$)/g, (_m, pfx, tex) => {
-    try {
-      return pfx + katex.renderToString(tex, { displayMode: false, throwOnError: false })
-    } catch (e) {
-      return pfx + tex
-    }
-  })
-
-  return withInline
-}
-
-const renderMd = (s) => md.render(renderMathToHtml(s ?? ''))
-
-// We use markdown-it + markdown-it-katex to render math when converting markdown to HTML.
-// Avoid double-rendering with KaTeX auto-render; keep client-side auto-render disabled.
-onMounted(async () => { await nextTick() })
 
 const hero = {
-  displayName: 'Xinghan Li 「李星汉」',
+  displayName: 'Kuowen Chen 「陈扩文」',
   description: [
     '<strong>Personal Profile</strong>',
-    `I am an undergraduate student in the <a href="https://iiis.tsinghua.edu.cn/en/" target="_blank" rel="noopener noreferrer"><strong>Institute for Interdisciplinary Information Sciences (Yao Class)</strong></a> at <a href="https://www.tsinghua.edu.cn/en/" target="_blank" rel="noopener noreferrer"><strong>Tsinghua University</strong></a>. My research focuses on <strong>reinforcement learning for mathematical reasoning</strong> and understanding the <strong>learning dynamics of optimizers</strong> with the goal of building intelligent systems that are interpretable and trustworthy for humans.`,
-    `My research experience includes an internship at the <a href="https://www.washington.edu/" target="_blank" rel="noopener noreferrer"><strong>University of Washington</strong></a>, where I worked under the guidance of Prof. <a href="https://simonshaoleidu.com/" target="_blank" rel="noopener noreferrer"><strong>Simon Shaolei Du</strong></a>. At Tsinghua, I have been working with Prof. <a href="https://kaifeng.ac/" target="_blank" rel="noopener noreferrer"><strong>Kaifeng Lyu</strong></a>, leading to a <strong>NeurIPS 2025 Poster</strong>.`,
+    `I am an undergraduate student in the <a href="https://iiis.tsinghua.edu.cn/en/" target="_blank" rel="noopener noreferrer"><strong>Institute for Interdisciplinary Information Sciences (Yao Class)</strong></a> at <a href="https://www.tsinghua.edu.cn/en/" target="_blank" rel="noopener noreferrer"><strong>Tsinghua University</strong></a>. My research focuses on Algorithms and Data Structures.`,
+    `At Tsinghua University, I worked with <a href="https://people.iiis.tsinghua.edu.cn/~jianli/" target="_blank" rel="noopener noreferrer"><strong>Prof. Jian Li</strong></a> and <a href="https://iiis.tsinghua.edu.cn/en/People/Faculty/DuanRan.htm" target="_blank" rel="noopener noreferrer"><strong>Prof. Ran Duan</strong></a>. My research experience includes a research visit at <a href="https://umich.edu/" target="_blank" rel="noopener noreferrer"><strong>University of Michigan</strong></a>
+, where I worked under the guidance of <a href="https://web.eecs.umich.edu/~nswein/" target="_blank" rel="noopener noreferrer"><strong>Prof. Nicole Wein</strong></a>
+ and <a href="https://web.eecs.umich.edu/~pettie/" target="_blank" rel="noopener noreferrer"><strong>Prof. Seth Pettie</strong></a>.`,
     'I am actively seeking <strong>PhD opportunities starting Fall 2026.</strong>'
   ],
   avatar: '/images/avatar.png',
   links: [
     { label: 'CV', href: '/files/cv.pdf' },
-    { label: 'Email', href: 'mailto:xh-li22@mails.tsinghua.edu.cn' },
-    { label: 'GitHub', href: 'https://github.com/XinghanLi66' },
-    { label: 'Twitter', href: 'https://x.com/XinghanLi66' }
+    { label: 'ckw22 [at] mails.tsinghua [dot] edu.cn', href: 'mailto:ckw22@mails.tsinghua.edu.cn' },
+    { label: 'ckw110111 [at] gmail [dot] com', href: 'mailto:ckw110111@gmail.com'},
   ]
 }
 
 const publications = [
   {
-    title: 'Adam Reduces a Unique Form of Sharpness: Theoretical Insights Near the Minimizer Manifold',
+    title: 'New Result on a General Class of Minimum Norm Optimization Problems',
     // simple inline HTML to bold your name
     authors:
-      '<strong>Xinghan Li</strong>*, Haodong Wen*, Kaifeng Lyu',
-    venue: 'NeurIPS 2025',
-    venueHref: 'https://neurips.cc/virtual/2025/loc/san-diego/poster/116405',
-    summary: String.raw`We use an SDE to capture Adam's dynamics for $O(\eta^{-2})$ time, showing that Adam implicitly minimizes a new kind of sharpness: $\mathrm{tr}\big(\mathrm{Diag}(H)^{1/2}\big)$ with label noise, instead of SGD's $\mathrm{tr}(H)$.`,
+      '<strong>Kuowen Chen</strong>, Jian Li, Yuval Rabani Yiran Zhang',
+    venue: 'ICALP 2025',
+    venueHref: 'https://icalp2025.org',
+    summary: String.raw``,
     links: [
-      { label: 'ArXiv', href: 'https://arxiv.org/abs/2511.02773' },
-      { label: 'Poster', href: '/files/adam_poster.pdf' }
+      { label: 'ArXiv', href: 'https://arxiv.org/abs/2504.13489' },
+    ]
+  }
+]
+const preprints = [
+  {
+    title:'The Squishy Grid Problem',
+    authors:'Zixi Cai, <strong>Kuowen Chen</strong>, Shengquan Du, Arnold Filtser, Seth Pettie, Daniel Skora',
+    venue:'',
+    venueHref:'',
+    summary:String.raw``,
+    links:[
+      {label: 'Arxiv', href: 'https://arxiv.org/abs/2507.23105'},
+    ]
+  },
+  {
+    title:'A Polynomial-Time Algorithm for the Next-to-Shortest Path Problem on Positively Weighted Directed Graphs',
+    authors:'Kuowen Chen, Nicole Wein, Yiran Zhang',
+    venue:'',
+    venueHref:'',
+    summary:String.raw``,
+    links:[
+      {label:'Arxiv', href: 'https://arxiv.org/abs/2511.04345'}
     ]
   }
 ]
 
 
-
 const projects = [
   {
-    title: 'Accelerating Model-based Learning of Locomotion with Pretrained Demonstrations',
-    summary:
-      'PPO-trained A1 robot locomotion in IsaacGym with Dreamer-based online fine-tuning in MuJoCo.',
-    image: '/images/projects/gym2mjc.png',
-    badges: ['Model-based RL', 'Robotics']
+    title: 'New Results on a General Class of Minimum Norm Optimization Problems',
+    summary:'',
+    badges: ['Approximation Algorithms']
   }
 ]
+import PublicationList from './publications.vue'
 </script>
 
 <template>
   <v-container class="page" tag="main">
-    <v-row justify="center">
-      <v-col cols="12" class="text-center">
-        <h1 class="page-heading">{{ hero.displayName }}</h1>
-        <v-divider class="heading-divider" />
-      </v-col>
-    </v-row>
+
 
     <v-row class="bio-row" align="start">
       <v-col cols="12" md="4" class="bio-photo">
@@ -103,19 +76,20 @@ const projects = [
           <v-img :src="hero.avatar" :alt="`Portrait of ${hero.displayName}`" cover class="portrait" />
         </v-sheet>
         <v-list class="link-list" density="comfortable">
-          <v-list-item class="link-line">
-            <template #title>
-              <span class="link-pipe">|</span>
-              <span v-for="(link, index) in hero.links" :key="link.href">
+          <v-list-item v-for="(link, index) in hero.links" :key="link.href">
+             <template #title>   
                 <a :href="link.href" target="_blank" rel="noopener noreferrer">{{ link.label }}</a>
-                <span class="link-pipe">|</span>
-                <!--<span v-if="index === 1" class="link-break" />-->
-              </span>
             </template>
           </v-list-item>
         </v-list>
       </v-col>
       <v-col cols="12" md="8" class="bio-text">
+        <v-row justify="center">
+          <v-col cols="12" class="text-center">
+            <h1 class="page-heading">{{ hero.displayName }}</h1>
+            <v-divider class="heading-divider" />
+          </v-col>
+        </v-row>
         <v-list class="bio-list" density="comfortable">
           <v-list-item v-for="line in hero.description" :key="line" class="bio-line">
             <template #title>
@@ -125,51 +99,11 @@ const projects = [
         </v-list>
       </v-col>
     </v-row>
-
+    <PublicationList title="Publications" :items="publications" />
+    <PublicationList title="Preprints" :items="preprints" />
     <!-- Publications -->
-    <v-row class="section">
-      <v-col cols="12">
-        <h2 class="section-heading">Publications</h2>
-        <v-divider class="section-divider" />
-      </v-col>
+    <!-- Publications -->
 
-      <v-col cols="12" v-for="item in publications" :key="item.title">
-        <article class="pub-card">
-          <a
-            v-if="item.venue"
-            class="pub-badge"
-            :href="item.venueHref || '#'"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {{ item.venue }}
-          </a>
-
-          <h3 class="entry-title">{{ item.title }}</h3>
-
-          <div class="entry-meta">
-            <!-- render authors HTML directly; keep this safe since authors are hardcoded -->
-            <span class="entry-authors" v-html="item.authors"></span>
-          </div>
-
-          <div class="entry-summary" v-html="renderMd(item.summary)"></div>
-
-          <div v-if="item.links?.length" class="entry-links">
-            <a
-              v-for="link in item.links"
-              :key="link.href"
-              :href="link.href"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {{ link.label }}
-            </a>
-          </div>
-        </article>
-
-        <v-divider class="entry-divider" />
-      </v-col>
-    </v-row>
 
     <!-- Project Highlights (temporarily commented out)
     <v-row class="section">
@@ -211,6 +145,11 @@ const projects = [
 </template>
 
 <style scoped>
+.link-list a{
+  color: #003366 !important;     
+  font-weight:600;
+  text-decoration: none;
+}
 .page {
   max-width: 960px;
   margin: 72px auto 96px;
@@ -218,8 +157,8 @@ const projects = [
 }
 
 .page-heading {
-  font-size: clamp(2.6rem, 5vw, 3.4rem);
-  font-weight: 400;
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  font-weight: 500;
   letter-spacing: 0.02em;
   margin: 0 0 16px;
 }
@@ -228,12 +167,12 @@ const projects = [
 .bio-row { margin-bottom: 36px; }
 
 .bio-photo { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-.portrait-frame { width: 100%; overflow: hidden; border-radius: 12px; }
+.portrait-frame { width: 100%; overflow: hidden; border-radius: 1px; }
 .portrait { width: 100%; height: 100%; }
 
-.link-list { width: 100%; }
-.link-line { justify-content: center; text-align: center; }
-.link-pipe { margin: 0 6px; font-weight: 600; color: #B7A3E3; }
+.link-list { width: 100%;}
+.link-line { justify-content: center; text-align: center;  }
+.link-pipe { margin: 0 6px; font-weight: 600; color: #003366; }
 .link-break { display: block; }
 
 .bio-text { display: flex; flex-direction: column; }
@@ -263,56 +202,6 @@ const projects = [
 .entry-links { display: flex; flex-wrap: wrap; gap: 12px; font-weight: 600; margin-top: 10px; }
 .entry-divider { margin: 25px 0; }
 
-/* --- Publications: single-column, left aligned, top-right badge --- */
-.pub-card { position: relative; padding: 0px 0px; text-align: left; }
 
-.pub-badge {
-  position: absolute; top: 0; right: 0;
-  background-color: #f09228; color: #fff;
-  padding: 4px 10px; border-radius: 16px;
-  font-weight: 700; font-size: 0.82rem; text-decoration: none;
-}
-
-/* Reserve space on right so title never runs under badge */
-.pub-card .entry-title { margin-top: 0; margin-bottom: 6px; max-width: calc(100% - 160px); padding-right: 12px; }
-
-/* Meta under title, left aligned */
-.entry-meta {
-  color: #55606a; font-size: 0.95rem; margin: 6px 0;
-  display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: flex-start;
-}
-.entry-authors { color: #333; font-weight: 500; }
-
-/* KaTeX tweaks inside summaries: keep KaTeX box metrics intact, only nudge superscripts */
-:deep(.katex) {
-  font-size: 1.02em;
-  line-height: 1; /* keep KaTeX internal spacing tight */
-  /* DO NOT change vertical-align on the root .katex element — that moves the whole formula */
-}
-
-/* Target the superscript box that KaTeX generates and lift it slightly. */
-:deep(.katex .katex-html .katex-sup),
-:deep(.katex .katex-html .vlist .katex-sup) {
-  display: inline-block; /* allow transform on inline content */
-  transform: translateY(-0.18em); /* nudge the superscript up only */
-}
-
-/* Optional: hide MathML fallback if present (prevents layout shifts) */
-:deep(.katex .katex-mathml) {
-  display: none;
-}
-
-@media (max-width: 960px) {
-  .page { margin: 48px auto 72px; padding: 0 16px; }
-  .bio-photo { align-items: flex-start; }
-  .link-line { text-align: left; }
-  .heading-divider { margin-bottom: 16px; }
-}
-
-@media (max-width: 600px) {
-  .page-heading { font-size: 2.4rem; }
-  .entry { margin-bottom: 10px; }
-  /* Badge gets narrower space on small screens */
-  .pub-card .entry-title { max-width: calc(100% - 120px); }
-}
 </style>
+<style scoped src="../../styles/publications.css"></style>

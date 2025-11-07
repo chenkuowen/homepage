@@ -1,0 +1,54 @@
+/* --- Publications: single-column, left aligned, top-right badge --- */
+.pub-card { 
+  position: relative; padding: 0px 0px; text-align: left; 
+  margin: 0 0;
+}
+
+.pub-badge {
+  position: absolute; top: 0; right: 0;
+  background-color: #f09228; color: #fff;
+  padding: 4px 10px; border-radius: 16px;
+  font-weight: 600; font-size: 0.82rem; text-decoration: none;
+}
+/* Reserve space on right so title never runs under badge */
+.pub-card .entry-title { margin-top: 0; margin-bottom: 3px; max-width: calc(100% - 160px); padding-right: 12px; }
+
+/* Meta under title, left aligned */
+.entry-meta {
+  color: #55606a; font-size: 0.95rem; margin: 6px 0;
+  display: flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: flex-start;
+}
+.entry-authors { color: #333; font-weight: 500; }
+
+/* KaTeX tweaks inside summaries: keep KaTeX box metrics intact, only nudge superscripts */
+:deep(.katex) {
+  font-size: 1.02em;
+  line-height: 1; /* keep KaTeX internal spacing tight */
+  /* DO NOT change vertical-align on the root .katex element — that moves the whole formula */
+}
+
+/* Target the superscript box that KaTeX generates and lift it slightly. */
+:deep(.katex .katex-html .katex-sup),
+:deep(.katex .katex-html .vlist .katex-sup) {
+  display: inline-block; /* allow transform on inline content */
+  transform: translateY(-0.18em); /* nudge the superscript up only */
+}
+
+/* Optional: hide MathML fallback if present (prevents layout shifts) */
+:deep(.katex .katex-mathml) {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .page { margin: 48px auto 72px; padding: 0 16px; }
+  .bio-photo { align-items: flex-start; }
+  .link-line { text-align: left; }
+  .heading-divider { margin-bottom: 16px; }
+}
+
+@media (max-width: 600px) {
+  .page-heading { font-size: 2.4rem; }
+  .entry { margin-bottom: 10px; }
+  /* Badge gets narrower space on small screens */
+  .pub-card .entry-title { max-width: calc(100% - 120px); }
+}
