@@ -3,16 +3,19 @@
 const hero = {
   displayName: 'Kuowen Chen 「陈扩文」',
   description: [
-    '<strong>Personal Profile</strong>',
-    `I am an undergraduate student in the <a href="https://iiis.tsinghua.edu.cn/en/" target="_blank" rel="noopener noreferrer"><strong>Institute for Interdisciplinary Information Sciences (Yao Class)</strong></a> at <a href="https://www.tsinghua.edu.cn/en/" target="_blank" rel="noopener noreferrer"><strong>Tsinghua University</strong></a>. My research focuses on Algorithms and Data Structures.`,
-    `At Tsinghua University, I worked with <a href="https://people.iiis.tsinghua.edu.cn/~jianli/" target="_blank" rel="noopener noreferrer"><strong>Prof. Jian Li</strong></a> and <a href="https://iiis.tsinghua.edu.cn/en/People/Faculty/DuanRan.htm" target="_blank" rel="noopener noreferrer"><strong>Prof. Ran Duan</strong></a>. My research experience includes a research visit at <a href="https://umich.edu/" target="_blank" rel="noopener noreferrer"><strong>University of Michigan</strong></a>
-, where I worked under the guidance of <a href="https://web.eecs.umich.edu/~nswein/" target="_blank" rel="noopener noreferrer"><strong>Prof. Nicole Wein</strong></a>
- and <a href="https://web.eecs.umich.edu/~pettie/" target="_blank" rel="noopener noreferrer"><strong>Prof. Seth Pettie</strong></a>.`,
+    `I am an undergraduate student in the <a href="https://iiis.tsinghua.edu.cn/en/" target="_blank" rel="noopener noreferrer"><strong>Institute for Interdisciplinary Information Sciences (Yao Class)</strong></a> at <a href="https://www.tsinghua.edu.cn/en/" target="_blank" rel="noopener noreferrer"><strong>Tsinghua University</strong></a>. My research focuses on algorithms and data structures.`,
+  
+    `At Tsinghua, I worked with <a href="https://people.iiis.tsinghua.edu.cn/~jianli/" target="_blank" rel="noopener noreferrer"><strong>Prof. Jian Li</strong></a> 
+      and <a href="https://iiis.tsinghua.edu.cn/en/People/Faculty/DuanRan.htm" target="_blank" rel="noopener noreferrer"><strong>Prof. Ran Duan</strong></a>. 
+      I also completed a research visit at the <a href="https://umich.edu/" target="_blank" rel="noopener noreferrer"><strong>University of Michigan</strong></a>, 
+      where I primarily worked under the supervision of <a href="https://web.eecs.umich.edu/~pettie/" target="_blank" rel="noopener noreferrer"><strong>Prof. Seth Pettie</strong></a>
+      , and had the opportunity to collaborate with <a href="https://web.eecs.umich.edu/~nswein/" target="_blank" rel="noopener noreferrer"><strong>Prof. Nicole Wein</strong></a> 
+      and <a href="https://sites.google.com/site/thsaranurak" target="_blank" rel="noopener noreferrer"><strong>Prof. Thatchaphol Saranurak</strong></a>.`,
+
     'I am actively seeking <strong>PhD opportunities starting Fall 2026.</strong>'
   ],
   avatar: '/images/avatar.png',
   links: [
-    { label: 'CV', href: '/files/cv.pdf' },
     { label: 'ckw22 [at] mails.tsinghua [dot] edu.cn', href: 'mailto:ckw22@mails.tsinghua.edu.cn' },
     { label: 'ckw110111 [at] gmail [dot] com', href: 'mailto:ckw110111@gmail.com'},
   ]
@@ -51,6 +54,16 @@ const preprints = [
     summary:String.raw``,
     links:[
       {label:'Arxiv', href: 'https://arxiv.org/abs/2511.04345'}
+    ]
+  },
+  {
+    title:'Contention Resolution, With and Without a Global Clock',
+    authors:'Zixi Cai, Kuowen Chen, Shengquan Du, Tsvi Kopelowitz, Seth Pettie, Ben Plosk',
+    venue:'',
+    venueHref:'',
+    summary:String.raw``,
+    links:[
+      {label:'PDF', href: '/files/Contention_Resolution.pdf'}
     ]
   }
 ]
